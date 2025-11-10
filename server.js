@@ -1,29 +1,17 @@
+import "dotenv/config";
 import express from "express";
-import playersRoutes from "./src/modules/players/routes/playersRoutes.js";
-import teamsRoutes from "./src/modules/teams/routes/teamsRoutes.js";
+import { connectDB } from "./shared/middlewares/connect-db.js";
+import playersRouter from "./modules/players/players.routes.js";
 
 const app = express();
-const PORT = process.env.PORT || 3000;
-
-// App-level middlewares
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(connectDB);
 
-// Routers
-app.use("/api/players", playersRoutes);
-app.use("/api/teams", teamsRoutes);
+app.use("/api/players", playersRouter);
 
-// 404
-app.use((req, res) => {
-  res.status(404).json({ message: "Route not found" });
-});
+app.get("/", (_req, res) => res.send("DreamTeam Builder API v3 is running"));
 
-// Error handler 
-app.use((err, req, res, next) => {
-  console.error("[ERROR]", err);
-  res.status(500).json({ message: "Internal server error" });
-});
-
-app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
-});
+const port = process.env.PORT || 3000;
+app.listen(port, () =>
+  console.log(`Server is running at http://localhost:${port}`)
+);
