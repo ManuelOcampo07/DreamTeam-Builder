@@ -1,5 +1,4 @@
-// frontend/src/api.js
-const API_BASE_URL = 'http://localhost:3000/api'; // Ensure this matches your backend URL
+const API_BASE_URL = 'http://localhost:3000/api';
 
 export async function searchPlayers(query) {
   try {
@@ -8,11 +7,9 @@ export async function searchPlayers(query) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
     const data = await response.json();
-    return data.data; // The API returns { meta: {}, data: [] }
+    return data.data;
   } catch (error) {
     console.error("Error searching players:", error);
     return [];
   }
 }
-
-// You can add more API functions here for other CRUD operations

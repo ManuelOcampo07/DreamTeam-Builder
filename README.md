@@ -127,8 +127,7 @@ To run the full-stack application, you need to start both the backend and the fr
 -   **Frontend UI with React.js**: Responsive design for player search and team building.
 -   **Player Search**: Search for players by name from the MongoDB database.
 -   **Player Details Display**: View comprehensive information for a selected player.
--   **Interactive Football Field**: A visual representation of a football pitch (4-4-2 formation).
+-   **Interactive Football Field**: A visual representation of a football pitch.
 -   **Player Assignment**: Click to select a player from search results, then click a position on the field to assign them. Players can be moved between positions.
 -   **API Integration**: Frontend communicates with the Express.js backend to fetch player data.
 
-Enjoy building your DreamTeam!

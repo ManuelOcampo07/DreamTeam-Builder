@@ -1,12 +1,12 @@
 import "dotenv/config";
 import express from "express";
-import cors from "cors"; // Import cors
+import cors from "cors";
 import { connectDB } from "./shared/middlewares/connect-db.js";
 import playersRouter from "./modules/players/players.routes.js";
 
 const app = express();
 app.use(express.json());
-app.use(cors()); // Use cors middleware
+app.use(cors());
 app.use(connectDB);
 
 app.use("/api/players", playersRouter);

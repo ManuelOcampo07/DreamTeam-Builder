@@ -6,7 +6,6 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const filePath = path.resolve(__dirname, "../../../data/teams.json");
 
-// Helpers
 async function readAll() {
   const raw = await fs.readFile(filePath, "utf8");
   return JSON.parse(raw || "[]");
@@ -32,7 +31,7 @@ export async function addNewTeam(payload) {
     id: newId,
     name: payload.name,
     formation: payload.formation,
-    players: payload.players || [], // array de ids
+    players: payload.players || [],
   };
   list.push(team);
   await writeAll(list);

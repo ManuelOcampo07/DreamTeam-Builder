@@ -20,7 +20,6 @@ const PlayerSchema = new mongoose.Schema(
   { timestamps: true, strict: false }
 );
 
-// text search index for player lookup
 PlayerSchema.index({
   full_name: "text",
   name: "text",
@@ -30,10 +29,6 @@ PlayerSchema.index({
 
 const Player = mongoose.model("Player", PlayerSchema);
 
-/**
- * Retrieves all players based on a query.
- * Supports search, sorting, and pagination.
- */
 export async function getAllPlayers(query = {}) {
   const { search, sortBy, sortOrder = "desc", page = 1, limit = 20 } = query;
 
@@ -55,45 +50,32 @@ export async function getAllPlayers(query = {}) {
     .limit(parseInt(limit, 10));
 }
 
-/**
- * Retrieves a single player by their ID.
- */
 export async function getPlayerById(id) {
-  // Check if the ID is a valid MongoDB ObjectId
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return null;
   }
   return Player.findById(id);
 }
 
-/**
- * Adds a new player to the database.
- */
 export async function addNewPlayer(payload) {
   const newPlayer = new Player(payload);
   return newPlayer.save();
 }
 
-/**
- * Updates an existing player by their ID.
- */
 export async function updatePlayer(id, data) {
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return null;
   }
   return Player.findByIdAndUpdate(id, data, {
-    new: true, // Return the updated document
-    runValidators: true, // Ensure new data meets schema requirements
+    new: true,
+    runValidators: true,
   });
 }
 
-/**
- * Deletes a player by their ID.
- */
 export async function deletePlayer(id) {
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return null;
   }
   const result = await Player.findByIdAndDelete(id);
-  return !!result; // Return true if a document was deleted, otherwise false
+  return !!result;
 }

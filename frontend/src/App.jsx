@@ -1,4 +1,3 @@
-// frontend/src/App.jsx
 import React, { useState } from 'react';
 import FootballField from './components/FootballField';
 import SearchBar from './components/SearchBar';
@@ -7,7 +6,7 @@ import PlayerDetails from './components/PlayerDetails';
 function App() {
   const [searchResults, setSearchResults] = useState([]);
   const [selectedPlayer, setSelectedPlayer] = useState(null);
-  const [teamFormation, setTeamFormation] = useState({}); // Stores players assigned to positions
+  const [teamFormation, setTeamFormation] = useState({});
 
   const handlePlayerSelect = (player) => {
     setSelectedPlayer(player);
@@ -18,7 +17,6 @@ function App() {
       setTeamFormation(prevFormation => {
         const newFormation = { ...prevFormation };
 
-        // If the player is already assigned to a position, remove them from there first
         const existingPositionId = Object.keys(newFormation).find(
           key => newFormation[key]?._id === selectedPlayer._id
         );
@@ -26,13 +24,11 @@ function App() {
           delete newFormation[existingPositionId];
         }
 
-        // Assign the player to the new position
         newFormation[positionId] = { ...selectedPlayer, assignedPosition: positionId };
         return newFormation;
       });
-      setSelectedPlayer(null); // Clear selected player after assignment
+      setSelectedPlayer(null);
     } else {
-      // Option to remove player from position if no player is selected
       setTeamFormation(prevFormation => {
         const newFormation = { ...prevFormation };
         if (newFormation[positionId]) {

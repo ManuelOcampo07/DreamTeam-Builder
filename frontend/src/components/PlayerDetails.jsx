@@ -1,4 +1,3 @@
-// frontend/src/components/PlayerDetails.jsx
 import React from 'react';
 
 function PlayerDetails({ player }) {
@@ -16,7 +15,6 @@ function PlayerDetails({ player }) {
       <p><strong>Height:</strong> {player.height_cm} cm</p>
       <p><strong>Weight:</strong> {player.weight_kgs} kg</p>
       <p><strong>Overall Rating:</strong> {player.overall_rating}</p>
-      {/* Add more details as needed */}
       <p>Click a position on the field to assign this player.</p>
     </div>
   );

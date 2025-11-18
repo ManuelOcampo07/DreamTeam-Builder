@@ -20,7 +20,6 @@ const PlayerSchema = new mongoose.Schema(
   { timestamps: true, strict: false }
 );
 
-// text search index for player lookup
 PlayerSchema.index({
   full_name: "text",
   name: "text",

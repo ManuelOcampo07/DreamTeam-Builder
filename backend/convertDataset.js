@@ -81,7 +81,7 @@ csv()
 
     fs.writeFileSync(output, JSON.stringify(simplified, null, 2), "utf8");
 
-    console.log(`Converted ${simplified.length} players → ${output}`);
+    console.log(`Converted ${simplified.length} players -> ${output}`);
     console.log("Sample:", simplified[0]);
   })
   .catch((err) => console.error("Error during conversion:", err));
