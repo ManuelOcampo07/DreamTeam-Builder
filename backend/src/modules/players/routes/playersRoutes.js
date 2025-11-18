@@ -17,7 +17,7 @@ const router = Router();
 // GET /api/players
 router.get("/", async (req, res, next) => {
   try {
-    const players = await getAllPlayers();
+    const players = await getAllPlayers(req.query);
     res.json(players);
   } catch (e) {
     next(e);

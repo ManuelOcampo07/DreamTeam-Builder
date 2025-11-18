@@ -2,7 +2,6 @@ import mongoose from "mongoose";
 
 const PlayerSchema = new mongoose.Schema(
   {
-    id: { type: Number, index: true },
     name: { type: String, trim: true },
     full_name: { type: String, trim: true },
     birth_date: { type: Date },

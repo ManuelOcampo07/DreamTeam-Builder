@@ -35,9 +35,15 @@ export async function getPlayers(req, res) {
       Player.find(query)
         .sort(sortObj)
         .skip((pageNum - 1) * limitNum)
-        .limit(limitNum),
+        .limit(limitNum)
+        .select("id _id name age height_cm weight_kgs positions nationality club_team"),
       Player.countDocuments(query),
     ]);
+
+    const mappedItems = items.map((item, index) => ({
+      ...item.toObject(),
+      sequentialId: (pageNum - 1) * limitNum + index + 1,
+    }));
 
     res.json({
       meta: {
@@ -48,7 +54,7 @@ export async function getPlayers(req, res) {
         sort: sortObj,
         queryApplied: query,
       },
-      data: items,
+      data: mappedItems,
     });
   } catch (e) {
     console.error(e);
