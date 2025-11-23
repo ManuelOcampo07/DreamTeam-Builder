@@ -46,17 +46,19 @@ function App() {
       </header>
       <main className="app-main">
         <aside className="app-sidebar">
-          <SearchBar onSearchResults={setSearchResults} onPlayerSelect={handlePlayerSelect} />
-          <div className="search-results-list">
-            {searchResults.map(player => (
-              <div
-                key={player._id}
-                className={`player-search-item ${selectedPlayer?._id === player._id ? 'selected' : ''}`}
-                onClick={() => handlePlayerSelect(player)}
-              >
-                {player.name} ({player.nationality})
-              </div>
-            ))}
+          <div className="search-bar-container">
+            <SearchBar onSearchResults={setSearchResults} onPlayerSelect={handlePlayerSelect} />
+            <div className="search-results-list">
+              {searchResults.map(player => (
+                <div
+                  key={player._id}
+                  className={`player-search-item ${selectedPlayer?._id === player._id ? 'selected' : ''}`}
+                  onClick={() => handlePlayerSelect(player)}
+                >
+                  {player.name} ({player.nationality})
+                </div>
+              ))}
+            </div>
           </div>
           <PlayerDetails player={selectedPlayer} />
         </aside>

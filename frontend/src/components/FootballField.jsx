@@ -4,9 +4,11 @@ import formation442 from '../assets/formation_442.json';
 function FootballField({ selectedTeam = {}, onPositionClick, selectedPlayer }) {
   return (
     <div className="football-field-container">
-      <h3>{formation442.name} Formation</h3>
+      <div className="formation-name-display">
+        {formation442.name}
+      </div>
       <svg className="football-field" viewBox="0 0 100 100">
-        <rect x="0" y="0" width="100" height="100" fill="#388E3C" />
+        <rect x="0" y="0" width="100" height="100" fill="#2E7D32" /> {/* Darker green */}
         <line x1="0" y1="50" x2="100" y2="50" stroke="white" strokeWidth="0.5" />
         <circle cx="50" cy="50" r="10" stroke="white" strokeWidth="0.5" fill="none" />
         <circle cx="50" cy="50" r="0.5" fill="white" />
@@ -21,17 +23,17 @@ function FootballField({ selectedTeam = {}, onPositionClick, selectedPlayer }) {
           const player = selectedTeam[pos.id];
           const isSelectedPosition = selectedPlayer && selectedPlayer.assignedPosition === pos.id;
           return (
-            <g 
-              key={pos.id} 
-              onClick={() => onPositionClick(pos.id)} 
+            <g
+              key={pos.id}
+              onClick={() => onPositionClick(pos.id)}
               style={{ cursor: 'pointer' }}
             >
               <circle
                 cx={pos.x}
                 cy={pos.y}
                 r="5"
-                fill={player ? "#FFC107" : (isSelectedPosition ? "#4CAF50" : "rgba(255,255,255,0.5)")}
-                stroke={isSelectedPosition ? "#000000" : "black"}
+                fill={player ? "black" : (isSelectedPosition ? "#4CAF50" : "black")}
+                stroke={isSelectedPosition ? "#4CAF50" : "white"}
                 strokeWidth="0.5"
               />
               <text
@@ -40,7 +42,8 @@ function FootballField({ selectedTeam = {}, onPositionClick, selectedPlayer }) {
                 textAnchor="middle"
                 dominantBaseline="middle"
                 fontSize="3"
-                fill={player ? "black" : "white"}
+                fill="white"
+                style={{ pointerEvents: 'none' }} /* Prevent text from interfering with click */
               >
                 {player ? player.name.split(' ')[0] : pos.role}
               </text>
